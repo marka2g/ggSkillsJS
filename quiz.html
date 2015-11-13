@@ -158,6 +158,9 @@
               blackBox('GumGum','Test') === 'GumGum-Test:GumGum-Test'
               blackBox('GumGum','Test','Join Us') === "GumGum-Test-Join Us!:GumGum-Test-Join Us!:GumGum-Test-Join Us!"
           </pre>
+          <p>
+            I do this all the time in Ruby but this is a first time I had to do <a href="http://stackoverflow.com/questions/960866/how-can-i-convert-the-arguments-object-to-an-array-in-javascript">this</a>. Nice!
+          </p>
         </li>
         <li>What are you daily basis tools when coding and releasing your code?
           <ul>
@@ -191,3 +194,22 @@
     </ol>
 </body>
 </html>
+<script type="text/javascript">
+  console.log(blackBox('GumGum') === 'GumGum');
+  console.log(blackBox('GumGum','Test') === 'GumGum-Test:GumGum-Test');
+  console.log(blackBox('GumGum','Test','Join Us') === "GumGum-Test-Join Us!:GumGum-Test-Join Us!:GumGum-Test-Join Us!");
+
+  function blackBox(){
+    var argsArray = [].slice.call(arguments),
+        argsString = argsArray.join('-'),
+        argsArrayCount = argsArray.length;
+
+    for (i = 0; i < argsArrayCount; i++) {
+      if (argsArray.length == 2) {
+        return argsString + ":" + argsString;
+      } else if (argsArray.length == 3) {
+        return argsString + "!:" + argsString + "!:" + argsString + "!";
+      }
+    }
+  }
+</script>
