@@ -17,7 +17,7 @@
               </p>
             </li>
             <li><a href="http://ejohn.org/">John Resig</a></li>
-            <li>Really like this guy too.
+            <li>I really like this guy too.
               <a href="https://github.com/robwormald">Rob Wormald</a>
             </li>
           </ul>
@@ -39,12 +39,13 @@
             <li>google</li>
             <li>stackoverflow</li>
             <li>github</li>
+            <li>developer.mozilla</li>
           </ul>
         </li>
         <li>What is minification and why we should use it? Do you use it? How?
-          <ul>
-            <li>Minification "is the process of removing all unneccessary characters from the source code without changing its functionality."  Yes, I use it all the time.  As a Rubyist, especially in the Rails framework, there is something called the asset pipeline which minifies all js and css files before deploy.  Usually, I will forgo minification on my local machine so as to speed up my own development environment and ensure that my local rails environment reloads and changes to my javascript files.</li>
-          </ul>
+          <p>
+            Minification "is the process of removing all unneccessary characters from the source code without changing its functionality."  Yes, I use it all the time.  As a Rubyist, especially in the Rails framework, there is something called the asset pipeline which minifies all js and css files before deploy.  Usually, I will forgo minification on my local machine so as to speed up my own development environment and ensure that my local rails environment reloads and changes to my javascript files.
+          </p>
         </li>
         <li>What is the DOM? And the BOM? What's the difference? Give us a one-line example of using each one.
           <ul>
@@ -58,7 +59,7 @@
         </li>
         <li>Why is HTML5shiv important on some browsers?
           <ul>
-            <li>The HTML5shiv is purpose is to provide support for HTML5 elements that Internet Explorer doesn't know about.  Basically, it makes IE8 suck less.</li>
+            <li>The HTML5shivs purpose is to provide support for HTML5 elements that Internet Explorer doesn't know about.  Basically, it makes IE8 suck less.</li>
           </ul>
         </li>
         <li>How many ways to communicate between two different domain pages do you know? (client-side, of course)
@@ -66,17 +67,17 @@
             <li>CORS - Cross-Origin resource sharing.</li>
             <li>JSONP - </li>
             <li>Call the window.open method with  targeted window name.</li>
-            <li></li>
+            <li> ... XMLHttpRequest() </li>
           </ul>
         </li>
         <li>Is <em>document.write</em> good or bad? When its good? When its bad?
-          <ul>
-            <li>Maybe. Depending on how or where you are loading a script file, document.write() can inadvertantly append partial or malformed HTML into a document.  Bottom line, make sure the page is loaded before using this. Otherwise, its the fastest way to add script generated text into a page. </li>
-          </ul>
+          <p>
+            Maybe. Depending on how or where you are loading a script file, document.write() can inadvertantly append partial or malformed HTML into a document.  Bottom line, make sure the page is loaded before using this. Otherwise, its the fastest way to add script generated text into a page.
+          </p>
         </li>
         <li>What do you understand for self-invoking function? Do you use them? Why?
           <ul>
-            <li>I seem to be using this more and more these days.  JS frameworks use the heck out of this technique, i.e. jQuery, Nodejs, Reactjs. The simple description is, if you have a function expression, you can make it self-invoke by adding a parenthesis to the end. Example, we can build an anonymous self-invoking function this way:
+            <li>I seem to be using this more and more these days.  JS frameworks use the heck out of this technique, i.e. jQuery, Nodejs, Reactjs. The simple description is that you can make a function self-invoke by adding a parenthesis to the end. As another example, we can build an anonymous self-invoking function this way:
               <pre>
                 (function(){
                   return console.log("Howdy Gum Gum!");
@@ -90,16 +91,80 @@
             <li>The honest answer is, no.  I write a lot of coffeescript to start.  So, if I do use a linter I'll use coffeelint. </li>
           </ul>
         </li>
-        <li>What do you know about memory leaks?</li>
-        <li>Have you heard of the "Repainting" problem on the browser? Tell us about it.</li>
-        <li>Write the best implementation of "blackBox" you can think of:
-<pre>
-    blackBox('GumGum') === 'GumGum'
-    blackBox('GumGum','Test') === 'GumGum-Test:GumGum-Test'
-    blackBox('GumGum','Test','Join Us') === "GumGum-Test-Join Us!:GumGum-Test-Join Us!:GumGum-Test-Join Us!"
-</pre>
+        <li>What do you know about memory leaks?
+          <p>
+            This topic can be challenging and requires the utmost care and meticulous attention to detail. First, ECMAScript allows various implementers(IE8 for instance gives low priority to GC ops) to apply garbage collection at their choosing. This can and has caused memory leak issues during hoisting when javascript is constructing the Execution context and Scope chain.</p>
+            <p>To illustrate, lets talk about the javascript execution context and how the scope chain is contructed. First, memory gets set aside or 'hoisted' for all neccessary variables(initially set to undefined) and declared functions that are needed by the compiler. After that completes, the executable code gets run at the bottom of the scope chain. If the developer builds a function that naively declares function expressions at the bottom, this could cause unreachable memory. The likelihood that this code will cause memory leaks in IE8 is high.  That was a long-winded explanation so lets illustrate with some code.
+              <pre>
+                // Consider this sucky code:
+
+                function checkForRain(isRaining){
+                  if(isRaining === true){
+                    bringUmbrella();
+                  } else {
+                    bringSunglasses();
+                  }
+                  var bringUmbrella = function(){
+                    console.log("Its raining, boooooo!");
+                  }
+                  var bringSunglasses = function(){
+                    console.log("Its sunny out, nice!");
+                  }
+                }
+
+                // after hoisting, the scope chain looks like this where the inner functions have now become to be unreachable.
+
+                function checkForRain(isRaining){
+                  var bringUmbrella = undefined;
+                  var bringSunglasses = undefined;
+
+                  if(isRaining === true){
+                    bringUmbrella();
+                  } else {
+                    bringSunglasses();
+                  }
+
+                  bringUmbrella = function(){
+                    console.log("Its raining, boooooo!");
+                  }
+
+                  bringSunglasses = function(){
+                    console.log("Its sunny out, nice!");
+                  }
+                }
+              </pre>
+          </p>
+          <p>
+            The lesson to learn is don't use function expressions, use declared functions instead but mostly, be careful!
+            <pre>
+              function bringUmbrella(){
+                console.log("Its raining, boooooo!");
+              }
+
+              function bringSunglasses(){
+                console.log("Its sunny out, nice!");
+              }
+            </pre>
+          </p>
         </li>
-        <li>What are you daily basis tools when coding and releasing your code?</li>
+        <li>Have you heard of the "Repainting" problem on the browser? Tell us about it.
+          <p>
+            I will be forthright in saying that I have never had to deal with this issue per se and just read about it <a href="http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/">here</a>.
+          </p>
+        </li>
+        <li>Write the best implementation of "blackBox" you can think of:
+          <pre>
+              blackBox('GumGum') === 'GumGum'
+              blackBox('GumGum','Test') === 'GumGum-Test:GumGum-Test'
+              blackBox('GumGum','Test','Join Us') === "GumGum-Test-Join Us!:GumGum-Test-Join Us!:GumGum-Test-Join Us!"
+          </pre>
+        </li>
+        <li>What are you daily basis tools when coding and releasing your code?
+          <ul>
+            <li><a href="https://atom.io/">Atom Text Editor</a></li>
+            <li>Chrome Inspector</li>
+          </ul>
+        </li>
     </ol>
     <h2>Extras</h2>
     <ol>
