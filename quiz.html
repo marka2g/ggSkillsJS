@@ -94,7 +94,7 @@
         <li>What do you know about memory leaks?
           <p>
             This topic can be challenging and requires the utmost care and meticulous attention to detail. First, ECMAScript allows various implementers(IE8 for instance gives low priority to GC ops) to apply garbage collection at their choosing. This can and has caused memory leak issues during hoisting when javascript is constructing the Execution context and Scope chain.</p>
-            <p>To illustrate, lets talk about the javascript execution context and how the scope chain is contructed. First, memory gets set aside or 'hoisted' for all neccessary variables(initially set to undefined) and declared functions that are needed by the compiler. After that completes, the executable code gets run at the bottom of the scope chain. If the developer builds a function that naively declares function expressions at the bottom, this could cause unreachable memory. The likelihood that this code will cause memory leaks in IE8 is high.  That was a long-winded explanation so lets illustrate with some code.
+            <p>To illustrate, lets talk about the javascript Execution context and how the Scope chain is contructed. First, memory gets set aside or 'hoisted' for all neccessary variables(initially set to undefined) and declared functions that are needed by the compiler. After that completes, the executable code gets run at the bottom of the scope chain. If the developer builds a function that naively declares function expressions at the bottom, this could cause unreachable memory. The likelihood that this code will cause memory leaks in IE8 is high.  That was a long-winded explanation so lets illustrate with some code.
               <pre>
                 // Consider this sucky code:
 
@@ -170,7 +170,7 @@
             <ul>Application Stack
               <li>Http Server: <a href="https://www.nginx.com/resources/wiki/">Nginx</a></li>
               <li>App Server: <a href="http://puma.io/">Puma</a></li>
-              <li>For deployment automation in a rails app<a href="http://nadarei.co/mina/">Mina</a></li>
+              <li>For deployment automation in a rails app<a href="http://nadarei.co/mina/"> Mina</a></li>
             </ul>
           </ul>
         </li>
@@ -179,7 +179,7 @@
     <ol>
         <li>How would you deploy directly from your git repo?
           <p>
-            I am a bit unclear as to what this question is asking.  Currently I use <a href="http://nadarei.co/mina/">Mina</a> but in the past, I mostly used <a href="http://capistranorb.com/">Capistrano</a>.  If I was deploying a nodejs or pure js app, I would consider this package <a href="https://github.com/shipitjs/shipit">Shipit</a>.
+            Currently I use <a href="http://nadarei.co/mina/">Mina</a> but in the past, I mostly used <a href="http://capistranorb.com/">Capistrano</a>.  This looks like a cool package for deploying a nodejs or pure js apps: <a href="https://github.com/shipitjs/shipit">Shipit</a>.
           </p>
         </li>
         <li>What does 664 means to you and your files?

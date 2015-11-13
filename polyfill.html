@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GumGum - JavaScript Engineering Skill Test - Quiz</title>
+</head>
+<body>
+    <h1>Browser Polyfills</h1>
+    <p>Mr. Crazy Banker asked us to "improve" the UI for clients, so whenever you get out of any text field, it prompts for confirmation of its value.</p>
+    <p>On cancel, the field is emptied. Otherwise the value remains.</p>
+    <form>
+        <p>Name: <input type="text"></p>
+        <p>Last Name: <input type="text"></p>
+    </form>
+    <h2>Pluses:</h2>
+    <ul>
+        <li>No jQuery or any other 3rd party libs.</li>
+        <li>Works for dynamically added input elements.</li>
+    </ul>
+    <script type="text/javascript">
+      // http://www.w3.org/WAI/UA/TS/html401/cp0102/0102-ONFOCUS-ONBLUR-INPUT.html
+      // http://www.quirksmode.org/blog/archives/2008/04/delegating_the.html
+      // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+      // psudo code
+        // collect all text fields on page into an array
+          // add an event listener on each
+        // write a function to pass into the event listeners and handle confirmation
+
+      function crazyBanker(event) {
+        var inputTextField = event.target,
+            inputValue = inputTextField.value,
+            confimation = confirm("Are you sure that the value " + inputValue + " is correct?");
+
+        // On cancel, the field is emptied. Otherwise the value remains.
+        if (confimation) {
+          inputTextField.value = "";
+        }
+      }
+
+      // capture all page inputs into an array & add an event listener to each
+      [].slice.call(document.getElementsByTagName("input")).forEach(function(inputTextField){
+        inputTextField.addEventListener("blur", crazyBanker);
+      });
+    </script>
+</body>
+</html>
