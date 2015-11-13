@@ -135,7 +135,7 @@
               </pre>
           </p>
           <p>
-            The lesson to learn is don't use function expressions, use declared functions instead but mostly, be careful!
+            The lesson to learn is don't use function expressions in this situation, use declared functions instead. Also, be careful!
             <pre>
               function bringUmbrella(){
                 console.log("Its raining, boooooo!");
@@ -149,7 +149,7 @@
         </li>
         <li>Have you heard of the "Repainting" problem on the browser? Tell us about it.
           <p>
-            I will be forthright in saying that I have never had to deal with this issue per se and just read about it <a href="http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/">here</a>.
+            I will be forthright in saying that I have never had to deal with this issue per se and just read about it <a href="http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/">here</a>.  I didn't know what the "Show Paint Rectangles" feature in Chrome’s DevTools was before this article.  This article makes me realize that I should be mindful of complex sass styles in combination with methods called on page events.
           </p>
         </li>
         <li>Write the best implementation of "blackBox" you can think of:
@@ -161,15 +161,33 @@
         </li>
         <li>What are you daily basis tools when coding and releasing your code?
           <ul>
+            <li>iTerm2</li>
             <li><a href="https://atom.io/">Atom Text Editor</a></li>
             <li>Chrome Inspector</li>
+            <ul>Application Stack
+              <li>Http Server: <a href="https://www.nginx.com/resources/wiki/">Nginx</a></li>
+              <li>App Server: <a href="http://puma.io/">Puma</a></li>
+              <li>For deployment automation in a rails app<a href="http://nadarei.co/mina/">Mina</a></li>
+            </ul>
           </ul>
         </li>
     </ol>
     <h2>Extras</h2>
     <ol>
-        <li>How would you deploy directly from your git repo?</li>
-        <li>What does 664 means to you and your files?</li>
+        <li>How would you deploy directly from your git repo?
+          <p>
+            I am a bit unclear as to what this question is asking.  Currently I use <a href="http://nadarei.co/mina/">Mina</a> but in the past, I mostly used <a href="http://capistranorb.com/">Capistrano</a>.  If I was deploying a nodejs or pure js app, I would consider this package <a href="https://github.com/shipitjs/shipit">Shipit</a>.
+          </p>
+        </li>
+        <li>What does 664 means to you and your files?
+          <p>
+            Simply put, its a shared file in the system that the public can read.
+            <pre>
+              $ chmod 664 myFile.js
+            </pre>
+            will change the permissions of the file so that a user AND a unix group can read/write and also it to be viewed by the public.
+          </p>
+        </li>
     </ol>
 </body>
 </html>
