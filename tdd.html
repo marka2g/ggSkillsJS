@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>GumGum - JavaScript Engineering Skill Test - OO && TDD</title>
+    <style>
+      img {width: 10%; display:inline-block; margin: 20px;};
+    </style>
 </head>
 <body>
     <h1>Test Driven Development</h1>
@@ -15,7 +18,14 @@
     </ol>
     <h2>Rules</h2>
     <ul>
-        <li>3rd party libs for TDD are ok, let us know how you decided what to use.</li>
+        <li>
+          <p>
+            3rd party libs for TDD are ok, let us know how you decided what to use.
+          </p>
+          <p>
+            I am using <a href="https://github.com/jasmine/jasmine"></a> Jasmine for unit testing.  To use, <a href="./spec-runner.html" target="_blank">click on this file</a>.  All of the tests in the <span>./jasmine-tests/spec</span> directory.
+          </p>
+        </li>
         <li>3rd party libs for drawing are ok too.</li>
     </ul>
     <h2>Bonus</h2>
@@ -23,6 +33,16 @@
         <li>Write a brief explanation of your OO pattern.</li>
         <li>Canvas</li>
     </ul>
-    <script src="robot_maker.js"></script>
+    <div id="robot-barracks">
+        <button id="spawn-minion">Spawn Mechanical Minion</button>
+        <button id="dismiss-brigade">Dismiss Brigade</button>
+        <div id="robot-brigade">
+        </div>
+    </div>
+    <script src="robot.js"></script>
+    <script src="robot-army.js"></script>
+    <script>
+      var robotBrigade = new RobotArmy();
+    </script>
 </body>
 </html>
